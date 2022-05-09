@@ -28,9 +28,7 @@ public class Tema {
 	@JsonIgnoreProperties("tema")
 	private List<Postagem> postagem;
 
-	
-	
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
@@ -52,8 +50,6 @@ public class Tema {
 
 	public void setPostagem(List<Postagem> postagem) {
 		this.postagem = postagem;
-	}
-	
-	
+	}	
 
 }
