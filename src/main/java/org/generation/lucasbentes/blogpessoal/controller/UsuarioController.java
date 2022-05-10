@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
+import org.generation.lucasbentes.blogpessoal.model.Postagem;
 import org.generation.lucasbentes.blogpessoal.model.Usuario;
 import org.generation.lucasbentes.blogpessoal.model.UsuarioLogin;
 import org.generation.lucasbentes.blogpessoal.repository.UsuarioRepository;
@@ -14,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,6 +36,14 @@ public class UsuarioController {
 	@GetMapping("/all")  // Colocamos essa subrota para ter mais um nivel de dificuldade para acessar os usuario
 	public ResponseEntity<List<Usuario>> getAll(){
 		return ResponseEntity.ok(usuarioRepository.findAll());
+	}
+
+	@GetMapping("/{id}")
+	public ResponseEntity<Usuario> getById(@PathVariable Long id){
+		
+		return usuarioRepository.findById(id)
+				.map(resp -> ResponseEntity.ok(resp))
+				.orElse(ResponseEntity.notFound().build());
 	}
 	
 	@PostMapping("/cadastrar")
